@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Limits &middot; GitHub Pages Lab</title>
+<meta name="description" content="The published quotas and hard restrictions of GitHub Pages.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129514;</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/app.js" defer></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">gh-pages<span>-lab</span></a>
+    <nav class="site">
+      <a href="index.html">Live tests</a>
+      <a href="limits.html">Limits</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="no-such-page.html">Try a 404</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <p class="pill">the ceiling</p>
+    <h1>Where GitHub Pages stops.</h1>
+    <p class="lede">
+      Two kinds of limit: numbers you can hit by accident, and capabilities that simply do not exist
+      no matter how you configure the repo.
+    </p>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2><span class="num">01</span>The numbers</h2>
+      <p>These are GitHub's published soft limits. Nothing deletes your site the instant you cross one &mdash; you get an email first.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Limit</th><th>Value</th><th>What happens past it</th></tr></thead>
+          <tbody>
+            <tr><td>Published site size</td><td><strong>1 GB</strong></td><td>Builds stop succeeding. Large media belongs on a CDN or in Releases.</td></tr>
+            <tr><td>Single file size</td><td><strong>100 MB</strong></td><td>Git itself refuses the push. Git LFS files are <em>not</em> served by Pages.</td></tr>
+            <tr><td>Bandwidth</td><td><strong>100 GB / month</strong></td><td>Soft cap. Sustained overuse gets your site throttled or disabled.</td></tr>
+            <tr><td>Builds</td><td><strong>10 per hour</strong></td><td>Extra pushes queue. Does not apply to Actions-based deploys.</td></tr>
+            <tr><td>Build timeout</td><td><strong>10 minutes</strong></td><td>The build fails. Big Jekyll sites need to be split or pre-built.</td></tr>
+            <tr><td>Deploy latency</td><td><strong>up to ~10 min</strong></td><td>Plus CDN caching. A push is not instantly visible; hard-refresh.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span class="num">02</span>Can it / can't it</h2>
+      <p>The second column is the honest answer, not the marketing one.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>You want to&hellip;</th><th>Pages?</th><th>What you actually need</th></tr></thead>
+          <tbody>
+            <tr><td>Serve HTML, CSS, JS, images, fonts, PDFs</td><td class="yes">Yes</td><td>&mdash;</td></tr>
+            <tr><td>Use React, Vue, Svelte, Tailwind</td><td class="yes">Yes</td><td>Build locally or in Actions; commit the <code>dist/</code> output.</td></tr>
+            <tr><td>HTTPS on a custom domain</td><td class="yes">Yes</td><td>A <code>CNAME</code> file plus DNS records. Free certificate.</td></tr>
+            <tr><td>Run PHP / Node / Python / Ruby</td><td class="no">No</td><td>Render, Railway, Fly.io, Vercel, a VPS.</td></tr>
+            <tr><td>A database (MySQL, Postgres, Mongo)</td><td class="no">No</td><td>Supabase, Firebase, PlanetScale, Turso.</td></tr>
+            <tr><td>Accept a contact form</td><td class="no">No</td><td>Formspree, Getform, Basin, or a serverless function.</td></tr>
+            <tr><td>User accounts and logins</td><td class="no">No</td><td>Auth0, Clerk, Supabase Auth. The UI can live here; the auth cannot.</td></tr>
+            <tr><td>Hide an API key</td><td class="no">No</td><td>Anything shipped is public. Proxy through a backend you control.</td></tr>
+            <tr><td>Server-side redirects, rewrites, custom headers</td><td class="no">No</td><td>No <code>.htaccess</code>, no <code>_redirects</code>, no header control. Use a meta refresh or a real host.</td></tr>
+            <tr><td>Scheduled jobs / cron</td><td class="no">No</td><td>GitHub Actions on a schedule can regenerate files and commit them.</td></tr>
+            <tr><td>Password-protect the site</td><td class="no">No</td><td>A public Pages site is public even from a private repo (Enterprise aside).</td></tr>
+            <tr><td>Server logs or analytics</td><td class="no">No</td><td>Client-side analytics only: Plausible, GoatCounter, Umami.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span class="num">03</span>Rules that get sites taken down</h2>
+      <p>From GitHub's Pages terms. Worth knowing before you build something on top of it.</p>
+      <div class="grid2">
+        <div class="card"><h3>Not a general file host</h3><p>Pages is for a project or personal site. Using it as a CDN or backup drive is against the terms.</p></div>
+        <div class="card"><h3>No commercial transactions</h3><p>No storefronts, no payment processing, no SaaS running on Pages itself. Linking out to Stripe is fine.</p></div>
+        <div class="card"><h3>One user site per account</h3><p>Exactly one <code>username.github.io</code>. Everything else is a project site under a subpath.</p></div>
+        <div class="card"><h3>No sensitive data</h3><p>Published files are public. Treat the whole site as a press release.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Numbers can change &mdash; check <a href="https://docs.github.com/pages">docs.github.com/pages</a> for the current values.</p>
+  </div>
+</footer>
+
+</body>
+</html>
