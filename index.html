@@ -3,134 +3,158 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GitHub Pages Lab</title>
-<meta name="description" content="A live, self-testing template that shows what GitHub Pages can and cannot do.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129514;</text></svg>">
+<title>Brisbane Bacalla Jr &mdash; PHP / Laravel Developer</title>
+<meta name="description" content="Full-stack PHP developer in Cebu, Philippines. 5+ years building custom CMS, payroll, LMS and maintenance-management systems with Laravel and CakePHP.">
+<meta name="author" content="Brisbane Bacalla Jr">
+<meta property="og:title" content="Brisbane Bacalla Jr &mdash; PHP / Laravel Developer">
+<meta property="og:description" content="Full-stack PHP developer in Cebu, Philippines. 5+ years building custom CMS, payroll, LMS and maintenance-management systems with Laravel and CakePHP.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#04060b">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230b111d'/><text x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='monospace' font-size='26' font-weight='700' fill='%233b8dff'>BB</text></svg>">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
-<script src="assets/js/app.js" defer></script>
+<script src="assets/js/site.js" defer></script>
 </head>
 <body>
 
 <header class="site">
   <div class="wrap">
-    <a class="brand" href="index.html">gh-pages<span>-lab</span></a>
-    <nav class="site">
-      <a href="index.html">Live tests</a>
-      <a href="limits.html">Limits</a>
-      <a href="how-it-works.html">How it works</a>
-      <a href="no-such-page.html">Try a 404</a>
+    <a class="brand" href="index.html">
+      <span class="mark" aria-hidden="true">BB</span>
+      <span><b>Brisbane Bacalla Jr</b><small>PHP &middot; Laravel Developer</small></span>
+    </a>
+    <button class="navtoggle" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <nav class="site" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="experience.html">Experience</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
 
 <main>
   <div class="wrap hero">
-    <p class="pill">static hosting &middot; no server &middot; free TLS</p>
-    <h1>Everything below is running live, in your browser, off GitHub Pages.</h1>
+    <p class="eyebrow"><span class="dot" aria-hidden="true"></span> Cordova, Cebu &middot; Philippines</p>
+    <h1 class="big">Hello, I'm <span class="grad">Brisbane</span></h1>
     <p class="lede">
-      This page is not a description of GitHub Pages &mdash; it is a set of probes fired at the
-      live site. Green means Pages can do it. Red means it genuinely cannot, and the card tells
-      you what you would need instead.
+      Full-stack <strong>PHP developer</strong> with 5+ years building, maintaining and scaling
+      custom <strong>CMS</strong>, <strong>payroll</strong>, <strong>LMS</strong> and
+      maintenance-management systems &mdash; mostly <strong>Laravel</strong>, currently
+      <strong>CakePHP</strong>.
     </p>
-    <div class="row">
-      <button id="rerun">Run the tests again</button>
-      <button class="ghost" onclick="location.reload()">Hard reload</button>
+    <p class="lede">
+      I tend to land on systems that are already live and load-bearing: payroll that has to be
+      right, ticketing that field crews depend on, a CMS somebody runs their business from.
+    </p>
+    <div class="cta">
+      <a class="btn btn-primary" href="projects.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
+        See the work
+      </a>
+      <a class="btn btn-ghost" href="experience.html">Experience</a>
+      <a class="btn btn-ghost" href="contact.html">Get in touch</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat rv"><b>5+</b><span>years in PHP</span></div>
+      <div class="stat rv"><b>2019</b><span>Laravel since</span></div>
+      <div class="stat rv"><b>4</b><span>companies &amp; clients</span></div>
+      <div class="stat rv"><b>3</b><span>industries shipped in</span></div>
     </div>
   </div>
 
   <section>
     <div class="wrap">
-      <h2><span class="num">01</span>Capability probes</h2>
-      <p>Loaded at <span id="loaded-at">&hellip;</span>. Open DevTools &rarr; Network to watch each request.</p>
-
-      <div class="tests">
-        <article class="test" id="t-https" data-state="run">
-          <span class="status">RUNNING</span>
-          <h3>HTTPS and a valid certificate</h3>
-          <p class="why">Free on <code>*.github.io</code> and on custom domains via Let's Encrypt.</p>
-          <output>&hellip;</output>
-        </article>
-
-        <article class="test" id="t-json" data-state="run">
-          <span class="status">RUNNING</span>
-          <h3>A committed JSON file as a read-only API</h3>
-          <p class="why">The nearest thing to a database you get: public, cacheable, and changed only by a git commit.</p>
-          <output>&hellip;</output>
-        </article>
-
-        <article class="test" id="t-post" data-state="run">
-          <span class="status">RUNNING</span>
-          <h3>Writing data back with POST</h3>
-          <p class="why">No request ever reaches code you wrote. Contact forms need Formspree, Netlify Forms, or your own API.</p>
-          <output>&hellip;</output>
-        </article>
-
-        <article class="test" id="t-server" data-state="run">
-          <span class="status">RUNNING</span>
-          <h3>Server-side languages (PHP, Node, Python)</h3>
-          <p class="why">We committed a real <code>demo.php</code>. Watch it come back as plain text instead of running.</p>
-          <output>&hellip;</output>
-        </article>
-
-        <article class="test" id="t-cors" data-state="run">
-          <span class="status">RUNNING</span>
-          <h3>Calling third-party APIs from the browser</h3>
-          <p class="why">Only when that API sends CORS headers. You cannot add a proxy, because there is nothing to proxy with.</p>
-          <output>&hellip;</output>
-        </article>
-
-        <article class="test" id="t-storage" data-state="run">
-          <span class="status">RUNNING</span>
-          <h3>Remembering visitors</h3>
-          <p class="why"><code>localStorage</code> works, but it lives in one browser on one device. No shared state.</p>
-          <output>&hellip;</output>
-        </article>
-
-        <article class="test" id="t-routing" data-state="run">
-          <span class="status">RUNNING</span>
-          <h3>Deep links and SPA routing</h3>
-          <p class="why">URLs map to real files. This is why React Router breaks on refresh unless you use hash routing.</p>
-          <output>&hellip;</output>
-        </article>
-
-        <article class="test" id="t-secrets" data-state="run">
-          <span class="status">RUNNING</span>
-          <h3>Keeping a secret in the code</h3>
-          <p class="why">Impossible. Every published byte is downloadable by anyone with the URL.</p>
-          <output>&hellip;</output>
-        </article>
+      <div class="shead rv">
+        <h2 data-num="01">My Skills</h2>
+        <p>What I reach for day to day. The tools near the top of each row are the ones I have
+           actually shipped and maintained in production, not just read about.</p>
       </div>
+    <div class="skillgroup">
+      <h3>Core &amp; backend</h3>
+      <div class="skills">
+      <div class="skill rv" title="PHP"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" alt="PHP" loading="lazy" width="42" height="42"><span>PHP</span></div>
+      <div class="skill rv" title="Laravel"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" alt="Laravel" loading="lazy" width="42" height="42"><span>Laravel</span></div>
+      <div class="skill rv" title="CakePHP"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cakephp/cakephp-original.svg" alt="CakePHP" loading="lazy" width="42" height="42"><span>CakePHP</span></div>
+      <div class="skill rv" title="Java"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" loading="lazy" width="42" height="42"><span>Java</span></div>
+      <div class="skill rv" title="MySQL"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy" width="42" height="42"><span>MySQL</span></div>
+      <div class="skill rv" title="Eloquent ORM"><div class="fallback" aria-hidden="true">EO</div><span>Eloquent ORM</span></div>
+      </div>
+    </div>
+    <div class="skillgroup">
+      <h3>Front end</h3>
+      <div class="skills">
+      <div class="skill rv" title="Livewire"><div class="fallback" aria-hidden="true">LW</div><span>Livewire</span></div>
+      <div class="skill rv" title="Vue.js"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" alt="Vue.js" loading="lazy" width="42" height="42"><span>Vue.js</span></div>
+      <div class="skill rv" title="Alpine.js"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/alpinejs/alpinejs-original.svg" alt="Alpine.js" loading="lazy" width="42" height="42"><span>Alpine.js</span></div>
+      <div class="skill rv" title="Bootstrap"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" loading="lazy" width="42" height="42"><span>Bootstrap</span></div>
+      <div class="skill rv" title="jQuery"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jquery/jquery-original.svg" alt="jQuery" loading="lazy" width="42" height="42"><span>jQuery</span></div>
+      <div class="skill rv" title="JavaScript"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy" width="42" height="42"><span>JavaScript</span></div>
+      <div class="skill rv" title="Sass"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg" alt="Sass" loading="lazy" width="42" height="42"><span>Sass</span></div>
+      <div class="skill rv" title="HTML5"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5" loading="lazy" width="42" height="42"><span>HTML5</span></div>
+      <div class="skill rv" title="CSS3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3" loading="lazy" width="42" height="42"><span>CSS3</span></div>
+      </div>
+    </div>
+    <div class="skillgroup">
+      <h3>Deployment &amp; hosting</h3>
+      <div class="skills">
+      <div class="skill rv" title="SSH"><div class="fallback" aria-hidden="true">SSH</div><span>SSH</span></div>
+      <div class="skill rv" title="Apache"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apache/apache-original.svg" alt="Apache" loading="lazy" width="42" height="42"><span>Apache</span></div>
+      <div class="skill rv" title="cPanel"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cpanel/cpanel-original.svg" alt="cPanel" loading="lazy" width="42" height="42"><span>cPanel</span></div>
+      <div class="skill rv" title="CyberPanel"><div class="fallback" aria-hidden="true">CY</div><span>CyberPanel</span></div>
+      <div class="skill rv" title="Hostinger"><div class="fallback" aria-hidden="true">HO</div><span>Hostinger</span></div>
+      <div class="skill rv" title="GoDaddy"><div class="fallback" aria-hidden="true">GD</div><span>GoDaddy</span></div>
+      <div class="skill rv" title="Cron jobs"><div class="fallback" aria-hidden="true">CR</div><span>Cron jobs</span></div>
+      </div>
+      <p class="groupnote rv">Deployments run over SSH &mdash; <code>git pull</code> on the server, then Composer install and migrations &mdash; or through the host's file manager on shared plans. Experience on both <strong>dedicated servers</strong> and <strong>shared hosting</strong> with GoDaddy and Hostinger, including vhost and <code>.htaccess</code> config, PHP versions, SSL certificates and scheduled cron tasks.</p>
+    </div>
+    <div class="skillgroup">
+      <h3>Infrastructure &amp; tooling</h3>
+      <div class="skills">
+      <div class="skill rv" title="Docker"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" loading="lazy" width="42" height="42"><span>Docker</span></div>
+      <div class="skill rv" title="Git"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" loading="lazy" width="42" height="42"><span>Git</span></div>
+      <div class="skill rv" title="GitHub"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub" loading="lazy" width="42" height="42" class="onlight"><span>GitHub</span></div>
+      <div class="skill rv" title="Composer"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/composer/composer-original.svg" alt="Composer" loading="lazy" width="42" height="42"><span>Composer</span></div>
+      <div class="skill rv" title="Redis"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" alt="Redis" loading="lazy" width="42" height="42"><span>Redis</span></div>
+      <div class="skill rv" title="Linux"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" alt="Linux" loading="lazy" width="42" height="42"><span>Linux</span></div>
+      <div class="skill rv" title="Laravel Mix"><div class="fallback" aria-hidden="true">LM</div><span>Laravel Mix</span></div>
+      </div>
+    </div>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <h2><span class="num">02</span>The "API" that test 02 just fetched</h2>
-      <p>This table was empty in the HTML. JavaScript filled it from <code>data/posts.json</code> after the page loaded.</p>
-      <div class="tablewrap">
-        <table id="posts">
-          <thead><tr><th>ID</th><th>Title</th><th>Date</th><th>Tags</th></tr></thead>
-          <tbody><tr><td colspan="4">loading&hellip;</td></tr></tbody>
-        </table>
+      <div class="shead rv">
+        <h2 data-num="02">Right now</h2>
+        <p>Where my time goes at the moment.</p>
       </div>
-      <p style="font-size:14px;color:var(--muted)">
-        To change a row you edit <code>data/posts.json</code>, commit, and push. The site rebuilds in
-        under a minute. There is no admin panel, and there cannot be one without a backend.
-      </p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2><span class="num">03</span>What to read next</h2>
       <div class="grid2">
-        <div class="card">
-          <h3><a href="limits.html">The hard limits &rarr;</a></h3>
-          <p>Repo size, bandwidth, build quota, file size, and the published list of things you are not allowed to host.</p>
+        <div class="panel rv">
+          <h3>Forty Degrees Celsius Inc.</h3>
+          <p>Full-stack work on an online language-learning platform (LMS) in
+             <strong style="color:var(--text)">CakePHP</strong> &mdash; feature enhancements,
+             bug fixing and maintenance alongside the team.</p>
         </div>
-        <div class="card">
-          <h3><a href="how-it-works.html">Deploy, Jekyll, custom domains &rarr;</a></h3>
-          <p>Why <code>.nojekyll</code> exists, what breaks on a project site, and how to point your own domain here.</p>
+        <div class="panel rv">
+          <h3>Shipped &amp; live</h3>
+          <p><a href="https://hrmobiletires.ca/" target="_blank" rel="noopener noreferrer">High
+             River Mobile Tire Services</a> &mdash; a booking platform on Laravel 12, Livewire 4
+             and Flux, running in production on Hostinger.</p>
+        </div>
+        <div class="panel rv">
+          <h3>Off-hours maintenance</h3>
+          <p>Freelance support on an existing Laravel CMS: debugging, new functionality and
+             performance work scheduled outside business hours so nothing goes down mid-day.</p>
+        </div>
+        <div class="panel rv">
+          <h3>University of Cebu &mdash; BSCS</h3>
+          <p>BS Computer Science, Mandaue City. June 2013 &ndash; August 2018.</p>
+        </div>
+        <div class="panel rv">
+          <h3>Languages</h3>
+          <p>Bisaya, Tagalog and English &mdash; comfortable working in any of the three.</p>
         </div>
       </div>
     </div>
@@ -139,8 +163,12 @@
 
 <footer class="site">
   <div class="wrap">
-    <p><strong>gh-pages-lab</strong> &mdash; a template you can delete file by file to see what each one does.</p>
-    <p>No frameworks, no build step, no dependencies. View source on any page; that is exactly what the server sends.</p>
+    <p style="margin:0">&copy; <span data-year>2026</span> Brisbane Bacalla Jr &middot; built with plain HTML &amp; CSS</p>
+    <div class="right">
+      <a href="https://www.linkedin.com/in/brisbane-jr-bacalla-5598a2a1/" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/jmicarus12" rel="noopener">GitHub</a>
+      <a href="lab/index.html">Pages Lab</a>
+    </div>
   </div>
 </footer>
 

@@ -150,7 +150,7 @@ async function testRouting() {
       reading this very script back out of the network. */
 async function testSecrets() {
   try {
-    const res = await fetch('assets/js/app.js', { cache: 'no-store' });
+    const res = await fetch('lab.js', { cache: 'no-store' });
     const src = await res.text();
     report('t-secrets', 'warn',
       `Anyone can download this script (${(src.length / 1024).toFixed(1)} KB) and read every line.\n` +

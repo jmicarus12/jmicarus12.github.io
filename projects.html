@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects &mdash; Brisbane Bacalla Jr</title>
+<meta name="description" content="Custom CMS and payroll, telecom maintenance management, MLM distribution, and a static-hosting teaching site.">
+<meta name="author" content="Brisbane Bacalla Jr">
+<meta property="og:title" content="Projects &mdash; Brisbane Bacalla Jr">
+<meta property="og:description" content="Custom CMS and payroll, telecom maintenance management, MLM distribution, and a static-hosting teaching site.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#04060b">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230b111d'/><text x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='monospace' font-size='26' font-weight='700' fill='%233b8dff'>BB</text></svg>">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/site.js" defer></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="mark" aria-hidden="true">BB</span>
+      <span><b>Brisbane Bacalla Jr</b><small>PHP &middot; Laravel Developer</small></span>
+    </a>
+    <button class="navtoggle" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <nav class="site" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="experience.html">Experience</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero" style="padding-bottom:26px">
+    <p class="eyebrow">what I have shipped</p>
+    <h1 class="big">Selected <span class="grad">Projects</span></h1>
+    <p class="lede">
+      Mostly Laravel, some on top of admin boilerplates (AdminLTE, CoreUI, Paper Dashboard) and
+      some from an empty directory. The first one is live and you can click straight into it; the
+      rest are internal business systems, described here rather than linked.
+    </p>
+  </div>
+
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <div class="projects">
+    <article class="project rv">
+      <div class="top">
+        <div class="badge" aria-hidden="true">HR</div>
+        <div>
+          <h3>High River Mobile Tire Services</h3>
+          <p class="sub">hrmobiletires.ca &middot; mobile tire service, High River, Alberta</p>
+        </div>
+        <span class="role live"><span class="livedot" aria-hidden="true"></span>Live</span>
+      </div>
+      <p>A complete booking platform for a mobile tire business in Alberta: public marketing site, customer accounts, and an admin back office. Because the van drives to the customer, the booking flow has to capture exactly where that is. Built on the current Laravel stack &mdash; Laravel 12, Livewire 4 and Flux 2 &mdash; and deployed to Hostinger.</p>
+      <ul class="feats">
+        <li>Guest booking with no account required: contact details, date and time, service, tire brand and size</li>
+        <li>Service address captured field-by-field and pinned to latitude/longitude on a Leaflet map</li>
+        <li>Customer accounts through Google sign-in, so there are no passwords to store, plus Fortify two-factor auth, recovery codes and email verification</li>
+        <li>Booking history and detail views for signed-in customers</li>
+        <li>Separate admin guard and login, with its own dashboard</li>
+        <li>Appointment workflow &mdash; accept, cancel, complete &mdash; managed from the back office</li>
+        <li>Admin CRUD for tire services (with deactivate/reactivate), customer stories, review stats and booking settings</li>
+        <li>Photo album with drag-to-reorder image management</li>
+        <li>New-booking alerts pushed straight to Telegram, avoiding a paid SMS gateway</li>
+        <li>SEO meta, canonical and Open Graph tags, plus light and dark appearance</li>
+      </ul>
+      <div class="stack">
+        <span class="tag hot">Laravel 12</span>
+        <span class="tag hot">Livewire 4</span>
+        <span class="tag hot">Flux UI 2</span>
+        <span class="tag hot">Tailwind CSS 4</span>
+        <span class="tag">PHP 8.3</span>
+        <span class="tag">Vite 7</span>
+        <span class="tag">Livewire Blaze</span>
+        <span class="tag">Fortify</span>
+        <span class="tag">Socialite</span>
+        <span class="tag">Telegram API</span>
+        <span class="tag">Leaflet</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Hostinger</span>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://hrmobiletires.ca/" target="_blank" rel="noopener noreferrer">
+          Visit hrmobiletires.ca &nearr;
+        </a>
+      </div>
+    </article>
+    <article class="project rv">
+      <div class="top">
+        <div class="badge" aria-hidden="true">BF</div>
+        <div>
+          <h3>Beeforce CMS + Payroll</h3>
+          <p class="sub">Security agency operations platform</p>
+        </div>
+        <span class="role">Lead developer</span>
+      </div>
+      <p>A custom content-management and payroll system built from scratch for a security services company &mdash; the system the agency runs its guards, clients and money on. Roughly 100 Eloquent models and 80 migrations by the end.</p>
+      <ul class="feats">
+        <li>Guard records, employment history, education and family data</li>
+        <li>Daily time records feeding an end-to-end payroll run</li>
+        <li>Deductions, government remittances and cash advances</li>
+        <li>Client contracts, billing, collections and portfolios</li>
+        <li>Role-based access with activity logging and two-factor auth</li>
+        <li>Excel and Word report exports, SMS notifications</li>
+      </ul>
+      <div class="stack">
+        <span class="tag hot">Laravel 8</span>
+        <span class="tag hot">Livewire 2</span>
+        <span class="tag">Bootstrap 5</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Alpine.js</span>
+        <span class="tag">Spatie Permission</span>
+        <span class="tag">Activity Log</span>
+        <span class="tag">Laravel Excel</span>
+        <span class="tag">PhpWord</span>
+        <span class="tag">Twilio</span>
+        <span class="tag">Pusher</span>
+      </div>
+    </article>
+    <article class="project rv">
+      <div class="top">
+        <div class="badge" aria-hidden="true">HD</div>
+        <div>
+          <h3>HANDS</h3>
+          <p class="sub">Telecom site infrastructure &amp; maintenance management</p>
+        </div>
+        <span class="role">Maintenance &amp; features</span>
+      </div>
+      <p>A large operations system for telecom sites, maintained for Digitus (formerly Hayat Communications). 67 models covering the physical plant at each site and the work orders that keep it running. My brief was ongoing maintenance, new features and performance work &mdash; done off-hours so field operations never paused.</p>
+      <ul class="feats">
+        <li>Site inventory: locations, floors, cabinets, sharing and domains</li>
+        <li>Power and cooling plant &mdash; DC systems, batteries, UPS, mains, standby gensets, free-cooling units, air conditioning, fire systems</li>
+        <li>Trouble tickets with priority, status and resolution codes</li>
+        <li>Snag tracking by category, severity and owner</li>
+        <li>Preventive-maintenance planner with progress tracking</li>
+        <li>Leave planner, balances and review workflow for staff</li>
+        <li>Real-time notifications over WebSockets, dashboards in Chart.js</li>
+        <li>GeoJSON backbone mapping and Geotab fleet telematics</li>
+      </ul>
+      <div class="stack">
+        <span class="tag hot">Laravel 5.8</span>
+        <span class="tag">AdminLTE 3</span>
+        <span class="tag">Vue 2</span>
+        <span class="tag">Laravel WebSockets</span>
+        <span class="tag">Pusher</span>
+        <span class="tag">Yajra DataTables</span>
+        <span class="tag">Chart.js</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Laravel Auditing</span>
+        <span class="tag">Media Library</span>
+        <span class="tag">Geotab</span>
+      </div>
+    </article>
+    <article class="project rv">
+      <div class="top">
+        <div class="badge" aria-hidden="true">DNA</div>
+        <div>
+          <h3>DNA</h3>
+          <p class="sub">Product distribution / MLM platform</p>
+        </div>
+        <span class="role">Core functionality</span>
+      </div>
+      <p>A multi-level marketing and product distribution platform &mdash; the downline and stock side of the business, not a storefront. Started on Laravel 6 with a service-layer architecture, later rebuilt on Laravel 8 with Livewire on a Paper Dashboard base.</p>
+      <ul class="feats">
+        <li>Product catalogue with change history</li>
+        <li>Distribution stock and distribution-history ledgers</li>
+        <li>Service-layer architecture: BaseService, ProductService, DistributionService, UserService</li>
+        <li>Roles and permissions per distributor level</li>
+        <li>Server-side DataTables for large listings</li>
+        <li>Error monitoring wired to Bugsnag</li>
+      </ul>
+      <div class="stack">
+        <span class="tag hot">Laravel 6</span>
+        <span class="tag hot">Laravel 8</span>
+        <span class="tag">Livewire</span>
+        <span class="tag">Yajra DataTables</span>
+        <span class="tag">Bootstrap 4</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Bugsnag</span>
+        <span class="tag">Doctrine DBAL</span>
+      </div>
+    </article>
+    <article class="project rv">
+      <div class="top">
+        <div class="badge" aria-hidden="true">GP</div>
+        <div>
+          <h3>GitHub Pages Lab</h3>
+          <p class="sub">Self-testing static-hosting demo</p>
+        </div>
+        <span class="role">Side project</span>
+      </div>
+      <p>A small teaching site that probes its own host at runtime to show what static hosting can and cannot do &mdash; live HTTPS check, a JSON file used as a read-only API, a rejected POST, and a PHP file served as plain text to prove nothing executes server-side.</p>
+      <ul class="feats">
+        <li>Eight live capability probes, run in the visitor's browser</li>
+        <li>Published quotas and a can/can't reference table</li>
+        <li>Jekyll vs. .nojekyll, base paths and custom domains explained</li>
+        <li>No framework, no build step, no dependencies</li>
+      </ul>
+      <div class="stack">
+        <span class="tag hot">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">Vanilla JS</span>
+        <span class="tag">GitHub Pages</span>
+      </div>
+    </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="panel rv">
+        <h3>A note on the code</h3>
+        <p>The internal business systems are private client repositories, so they are described
+           here rather than linked. Happy to walk through architecture, schema decisions or
+           specific modules in a call &mdash; or to share a read-only walkthrough where the client
+           permits it.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p style="margin:0">&copy; <span data-year>2026</span> Brisbane Bacalla Jr &middot; built with plain HTML &amp; CSS</p>
+    <div class="right">
+      <a href="https://www.linkedin.com/in/brisbane-jr-bacalla-5598a2a1/" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/jmicarus12" rel="noopener">GitHub</a>
+      <a href="lab/index.html">Pages Lab</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
