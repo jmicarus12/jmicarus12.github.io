@@ -1,43 +1,60 @@
 # jmicarus12.github.io
 
-A self-testing GitHub Pages template. Every page demonstrates the platform rather than
-describing it: the home page fires live probes at the deployed site and reports which
-capabilities exist and which do not.
+Personal site of **Brisbane Bacalla Jr** — full-stack PHP / Laravel developer, Cebu, Philippines.
 
 **Live:** https://jmicarus12.github.io/
 
-## Files, and what each one teaches
+Plain HTML and CSS. No framework, no build step, no dependencies — which is exactly what
+GitHub Pages is good at.
 
-| File | Why it is here |
+## Pages
+
+| File | Contents |
 |---|---|
-| `index.html` | Eight live capability probes, plus a table populated by `fetch()` |
-| `limits.html` | Published quotas and a can/can't table |
-| `how-it-works.html` | Deploys, Jekyll, base paths, custom domains, common traps |
-| `404.html` | Delete it and GitHub's default 404 comes back |
-| `demo.php` | Proof no server-side code runs — it is served as plain text |
-| `data/posts.json` | A static file acting as a read-only API |
-| `.nojekyll` | Stops Jekyll from processing (and dropping) files |
-| `assets/css/style.css` | Plain CSS, light + dark, no build step |
-| `assets/js/app.js` | The probes; commented so it reads as documentation |
+| `index.html` | Introduction, quick stats, and the skills grid |
+| `experience.html` | Work history as a zigzag timeline, plus education |
+| `projects.html` | Beeforce CMS + Payroll, HANDS, DNA, and the Pages Lab |
+| `contact.html` | Email, LinkedIn, GitHub, Facebook |
+| `404.html` | Custom not-found page (uses absolute paths — it can be served at any depth) |
+| `lab/` | The self-testing GitHub Pages demo: live probes of what static hosting can and cannot do |
 
-## Learn by breaking it
+## Editing it
 
-- Delete `404.html`, push, visit a bad URL → GitHub's default 404.
-- Delete `.nojekyll`, rename `assets/` to `_assets/`, push → the styles vanish.
-- Change a leading `/` into a relative path (or back) to feel the project-site path trap.
-- Edit `data/posts.json`, push → the table changes without touching any HTML.
-- Add `<form action="/submit" method="post">` → nothing receives it. There is no server.
+Each page is standalone HTML, so the header and footer markup is repeated in all four.
+Change the nav in one and change it in the others too — that is the trade-off for having
+no build step.
+
+- **Text and content** — edit the HTML directly.
+- **Colours** — the whole theme is CSS custom properties at the top of `assets/css/style.css`
+  (`--bg`, `--blue`, `--surface`, …). Change those, not the rules below them.
+- **Skills** — each tile is one `<div class="skill">` in `index.html`. Logos load from the
+  Devicon CDN; if a logo is missing or the CDN is blocked, `assets/js/site.js` swaps in a
+  lettered monogram, so the grid never breaks.
+- **Animation** — the fade-in is gated on `html.js`. With JavaScript off, every element is
+  simply visible; nothing on the site depends on scripts to be readable.
+
+## Adding your resume as a download
+
+Not included by default, because the PDF contains a phone number and home address.
+To publish it anyway:
+
+```bash
+cp ~/Documents/"Bacalla Resume.pdf" assets/Brisbane-Bacalla-Resume.pdf
+# then add a link, e.g. in the hero of index.html:
+#   <a class="btn btn-ghost" href="assets/Brisbane-Bacalla-Resume.pdf" download>Resume (PDF)</a>
+```
 
 ## Local preview
-
-`fetch()` will not work from `file://`, so serve it:
 
 ```bash
 python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-## Publish
+Use a server rather than opening the files directly — the lab's `fetch()` probes do not work
+over `file://`.
 
-Settings → Pages → Source: **Deploy from a branch** → `main` / `/ (root)` → Save.
-Then `git push`, wait about a minute, and reload.
+## Deploy
+
+Settings → Pages → Source: **Deploy from a branch** → `main` / `/ (root)`.
+Then `git push`; the site updates in about a minute.

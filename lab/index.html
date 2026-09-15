@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GitHub Pages Lab</title>
+<meta name="description" content="A live, self-testing template that shows what GitHub Pages can and cannot do.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129514;</text></svg>">
+<link rel="stylesheet" href="../assets/css/lab.css">
+<script src="lab.js" defer></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">gh-pages<span>-lab</span></a>
+    <nav class="site">
+      <a href="../index.html">&larr; Portfolio</a>
+      <a href="index.html">Live tests</a>
+      <a href="limits.html">Limits</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="no-such-page.html">Try a 404</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <p class="pill">static hosting &middot; no server &middot; free TLS</p>
+    <h1>Everything below is running live, in your browser, off GitHub Pages.</h1>
+    <p class="lede">
+      This page is not a description of GitHub Pages &mdash; it is a set of probes fired at the
+      live site. Green means Pages can do it. Red means it genuinely cannot, and the card tells
+      you what you would need instead.
+    </p>
+    <div class="row">
+      <button id="rerun">Run the tests again</button>
+      <button class="ghost" onclick="location.reload()">Hard reload</button>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2><span class="num">01</span>Capability probes</h2>
+      <p>Loaded at <span id="loaded-at">&hellip;</span>. Open DevTools &rarr; Network to watch each request.</p>
+
+      <div class="tests">
+        <article class="test" id="t-https" data-state="run">
+          <span class="status">RUNNING</span>
+          <h3>HTTPS and a valid certificate</h3>
+          <p class="why">Free on <code>*.github.io</code> and on custom domains via Let's Encrypt.</p>
+          <output>&hellip;</output>
+        </article>
+
+        <article class="test" id="t-json" data-state="run">
+          <span class="status">RUNNING</span>
+          <h3>A committed JSON file as a read-only API</h3>
+          <p class="why">The nearest thing to a database you get: public, cacheable, and changed only by a git commit.</p>
+          <output>&hellip;</output>
+        </article>
+
+        <article class="test" id="t-post" data-state="run">
+          <span class="status">RUNNING</span>
+          <h3>Writing data back with POST</h3>
+          <p class="why">No request ever reaches code you wrote. Contact forms need Formspree, Netlify Forms, or your own API.</p>
+          <output>&hellip;</output>
+        </article>
+
+        <article class="test" id="t-server" data-state="run">
+          <span class="status">RUNNING</span>
+          <h3>Server-side languages (PHP, Node, Python)</h3>
+          <p class="why">We committed a real <code>demo.php</code>. Watch it come back as plain text instead of running.</p>
+          <output>&hellip;</output>
+        </article>
+
+        <article class="test" id="t-cors" data-state="run">
+          <span class="status">RUNNING</span>
+          <h3>Calling third-party APIs from the browser</h3>
+          <p class="why">Only when that API sends CORS headers. You cannot add a proxy, because there is nothing to proxy with.</p>
+          <output>&hellip;</output>
+        </article>
+
+        <article class="test" id="t-storage" data-state="run">
+          <span class="status">RUNNING</span>
+          <h3>Remembering visitors</h3>
+          <p class="why"><code>localStorage</code> works, but it lives in one browser on one device. No shared state.</p>
+          <output>&hellip;</output>
+        </article>
+
+        <article class="test" id="t-routing" data-state="run">
+          <span class="status">RUNNING</span>
+          <h3>Deep links and SPA routing</h3>
+          <p class="why">URLs map to real files. This is why React Router breaks on refresh unless you use hash routing.</p>
+          <output>&hellip;</output>
+        </article>
+
+        <article class="test" id="t-secrets" data-state="run">
+          <span class="status">RUNNING</span>
+          <h3>Keeping a secret in the code</h3>
+          <p class="why">Impossible. Every published byte is downloadable by anyone with the URL.</p>
+          <output>&hellip;</output>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span class="num">02</span>The "API" that test 02 just fetched</h2>
+      <p>This table was empty in the HTML. JavaScript filled it from <code>data/posts.json</code> after the page loaded.</p>
+      <div class="tablewrap">
+        <table id="posts">
+          <thead><tr><th>ID</th><th>Title</th><th>Date</th><th>Tags</th></tr></thead>
+          <tbody><tr><td colspan="4">loading&hellip;</td></tr></tbody>
+        </table>
+      </div>
+      <p style="font-size:14px;color:var(--muted)">
+        To change a row you edit <code>data/posts.json</code>, commit, and push. The site rebuilds in
+        under a minute. There is no admin panel, and there cannot be one without a backend.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span class="num">03</span>What to read next</h2>
+      <div class="grid2">
+        <div class="card">
+          <h3><a href="limits.html">The hard limits &rarr;</a></h3>
+          <p>Repo size, bandwidth, build quota, file size, and the published list of things you are not allowed to host.</p>
+        </div>
+        <div class="card">
+          <h3><a href="how-it-works.html">Deploy, Jekyll, custom domains &rarr;</a></h3>
+          <p>Why <code>.nojekyll</code> exists, what breaks on a project site, and how to point your own domain here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>gh-pages-lab</strong> &mdash; a template you can delete file by file to see what each one does.</p>
+    <p>No frameworks, no build step, no dependencies. View source on any page; that is exactly what the server sends.</p>
+  </div>
+</footer>
+
+</body>
+</html>
