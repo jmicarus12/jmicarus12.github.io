@@ -1,0 +1,151 @@
+/* ---------------------------------------------------------------
+   GitHub Pages Lab - stylesheet
+   Plain CSS on purpose: no build step, no Sass, no bundler.
+   GitHub Pages serves this file byte-for-byte as it sits in git.
+   --------------------------------------------------------------- */
+
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #f0f2f5;
+  --border: #d9dde3;
+  --text: #16191d;
+  --muted: #5b6672;
+  --accent: #2f6feb;
+  --ok: #1a7f4b;
+  --warn: #9a6400;
+  --fail: #b3261e;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --radius: 10px;
+  --maxw: 900px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1216;
+    --surface: #171b21;
+    --surface-2: #1e242c;
+    --border: #2b323b;
+    --text: #e6e9ed;
+    --muted: #9aa5b1;
+    --accent: #6ea8fe;
+    --ok: #4ade80;
+    --warn: #fbbf24;
+    --fail: #f87171;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+/* --- header / nav --- */
+header.site {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky; top: 0; z-index: 10;
+}
+header.site .wrap {
+  display: flex; align-items: center; gap: 16px;
+  flex-wrap: wrap; padding-block: 12px;
+}
+.brand {
+  font-family: var(--mono); font-weight: 700; font-size: 15px;
+  text-decoration: none; color: var(--text); letter-spacing: -0.3px;
+}
+.brand span { color: var(--accent); }
+nav.site { margin-left: auto; display: flex; gap: 4px; flex-wrap: wrap; }
+nav.site a {
+  color: var(--muted); text-decoration: none; font-size: 14px;
+  padding: 6px 10px; border-radius: 6px;
+}
+nav.site a:hover { background: var(--surface-2); color: var(--text); }
+nav.site a[aria-current="page"] { color: var(--text); background: var(--surface-2); font-weight: 600; }
+
+/* --- hero --- */
+.hero { padding: 48px 0 32px; }
+.hero h1 { font-size: clamp(28px, 5vw, 42px); line-height: 1.15; margin: 0 0 12px; letter-spacing: -1px; }
+.hero p.lede { font-size: 18px; color: var(--muted); margin: 0 0 20px; max-width: 62ch; }
+.pill {
+  display: inline-block; font-family: var(--mono); font-size: 12px;
+  padding: 4px 10px; border-radius: 999px;
+  background: var(--surface-2); border: 1px solid var(--border); color: var(--muted);
+}
+
+/* --- sections --- */
+section { padding: 28px 0; border-top: 1px solid var(--border); }
+section h2 { font-size: 22px; margin: 0 0 6px; letter-spacing: -0.4px; }
+section h2 .num { font-family: var(--mono); color: var(--accent); font-size: 14px; margin-right: 8px; }
+section > .wrap > p:first-of-type { color: var(--muted); margin-top: 0; }
+
+/* --- test cards --- */
+.tests { display: grid; gap: 12px; margin-top: 18px; }
+.test {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px;
+  display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: start;
+}
+.test .status {
+  grid-row: span 3;
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  padding: 3px 8px; border-radius: 5px; white-space: nowrap;
+  background: var(--surface-2); color: var(--muted); border: 1px solid var(--border);
+}
+.test[data-state="pass"] .status { color: var(--ok); border-color: currentColor; }
+.test[data-state="fail"] .status { color: var(--fail); border-color: currentColor; }
+.test[data-state="warn"] .status { color: var(--warn); border-color: currentColor; }
+.test h3 { margin: 0; font-size: 15px; font-weight: 650; }
+.test .why { margin: 0; font-size: 14px; color: var(--muted); }
+.test output {
+  font-family: var(--mono); font-size: 12.5px; color: var(--text);
+  background: var(--surface-2); border-radius: 6px; padding: 6px 9px;
+  display: block; overflow-x: auto; white-space: pre-wrap; word-break: break-word;
+}
+
+/* --- generic bits --- */
+code, kbd { font-family: var(--mono); font-size: 0.88em; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+pre {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px 16px; overflow-x: auto; font-family: var(--mono); font-size: 13px; line-height: 1.55;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+a { color: var(--accent); }
+
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+tbody tr:last-child td { border-bottom: 0; }
+td.yes { color: var(--ok); font-weight: 600; }
+td.no  { color: var(--fail); font-weight: 600; }
+
+.grid2 { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px;
+}
+.card h3 { margin: 0 0 6px; font-size: 15px; }
+.card p { margin: 0; font-size: 14px; color: var(--muted); }
+
+button {
+  font: inherit; font-size: 14px; cursor: pointer;
+  background: var(--accent); color: #fff; border: 0;
+  padding: 8px 14px; border-radius: 7px;
+}
+button.ghost { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+button:hover { filter: brightness(1.08); }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
+
+footer.site {
+  border-top: 1px solid var(--border); margin-top: 40px;
+  padding: 24px 0 40px; color: var(--muted); font-size: 13.5px;
+}
+footer.site p { margin: 4px 0; }

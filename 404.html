@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 &middot; GitHub Pages Lab</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129514;</text></svg>">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<!-- gh-pages-lab-404: the routing probe on the home page looks for this marker
+     to tell whether GitHub served OUR 404 page or its own default one. -->
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">gh-pages<span>-lab</span></a>
+    <nav class="site">
+      <a href="/index.html">Live tests</a>
+      <a href="/limits.html">Limits</a>
+      <a href="/how-it-works.html">How it works</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <p class="pill">HTTP 404</p>
+    <h1>No file lives at that path.</h1>
+    <p class="lede">
+      Which is the lesson: GitHub Pages answers a URL by looking for a matching file on disk.
+      No file, no page. There is no router, no controller, no rewrite rule to intercept it.
+    </p>
+    <p>You are seeing this custom page instead of GitHub's grey default because the repo
+       contains a <code>404.html</code> at its root. That is the whole mechanism.</p>
+    <div class="row">
+      <button onclick="location.href='/'">Back to the tests</button>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2><span class="num">&#9888;</span>Note the paths in this file</h2>
+      <p>
+        Every other page in this template uses relative links. This one cannot: a 404 can be
+        served at <em>any</em> depth (<code>/a/b/c/nope</code>), so its CSS and links must start
+        with <code>/</code> to resolve. On a project site those leading slashes would need the
+        project name in front &mdash; one more reason user sites are simpler to start with.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap"><p>Tip: an SPA on Pages can copy <code>index.html</code> to <code>404.html</code> so deep links boot the app.</p></div>
+</footer>
+
+</body>
+</html>

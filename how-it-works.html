@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How it works &middot; GitHub Pages Lab</title>
+<meta name="description" content="Deployment, Jekyll, paths, custom domains, and the traps that catch everyone once.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129514;</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/app.js" defer></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">gh-pages<span>-lab</span></a>
+    <nav class="site">
+      <a href="index.html">Live tests</a>
+      <a href="limits.html">Limits</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="no-such-page.html">Try a 404</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <p class="pill">the mechanics</p>
+    <h1>git push, and a CDN starts serving your folder.</h1>
+    <p class="lede">
+      That is the entire model. Everything confusing about Pages comes from one of four places:
+      the branch, Jekyll, the base path, or DNS.
+    </p>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2><span class="num">01</span>Turning it on</h2>
+      <p>Repository &rarr; <strong>Settings</strong> &rarr; <strong>Pages</strong> &rarr; Source: <em>Deploy from a branch</em> &rarr; <code>main</code> / <code>/ (root)</code> &rarr; Save.</p>
+<pre><code>git add -A
+git commit -m "Add site"
+git push origin main
+# wait ~1 minute, then open the URL shown in Settings &rarr; Pages</code></pre>
+      <p>The green checkmark next to your commit is the deploy. Click it to read the build log when something goes wrong.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span class="num">02</span>Two kinds of site, two kinds of URL</h2>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th></th><th>User site</th><th>Project site</th></tr></thead>
+          <tbody>
+            <tr><th>Repo name</th><td><code>username.github.io</code></td><td>anything, e.g. <code>my-app</code></td></tr>
+            <tr><th>URL</th><td><code>https://username.github.io/</code></td><td><code>https://username.github.io/my-app/</code></td></tr>
+            <tr><th>Root path</th><td><code>/</code></td><td><code>/my-app/</code> &mdash; the trap below</td></tr>
+            <tr><th>How many</th><td>one per account</td><td>unlimited</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>This repo is a user site</strong>, so <code>/</code> is the real root and absolute paths behave normally.</p>
+      <p>On a <em>project</em> site, <code>&lt;img src="/logo.png"&gt;</code> resolves to <code>username.github.io/logo.png</code> &mdash; outside your project &mdash; and 404s. That single slash is the most common Pages bug. This template uses relative paths (<code>assets/css/style.css</code>, no leading slash) everywhere, so it works unchanged in either layout.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span class="num">03</span>Jekyll, and why <code>.nojekyll</code> is in this repo</h2>
+      <p>Pages runs every push through Jekyll by default. Jekyll <strong>ignores any file or folder starting with an underscore</strong> unless it understands it, so a React or Vite build with <code>_next/</code> or <code>_assets/</code> silently loses files.</p>
+      <div class="grid2">
+        <div class="card">
+          <h3>Keep Jekyll</h3>
+          <p>Write Markdown, get Liquid templates and a blog engine for free. Add <code>_config.yml</code> and <code>_posts/</code>.</p>
+        </div>
+        <div class="card">
+          <h3>Skip Jekyll (this site)</h3>
+          <p>An empty <code>.nojekyll</code> file at the root. Every file is served exactly as committed. Required for most JS build output.</p>
+        </div>
+      </div>
+      <p style="margin-top:14px">Check it yourself: <code>ls -a</code> in the repo root shows the <code>.nojekyll</code> file that makes this page load its <code>assets/</code> folder reliably.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span class="num">04</span>Custom domain</h2>
+<pre><code># 1. At your DNS provider, for an apex domain (example.com):
+A     @   185.199.108.153
+A     @   185.199.109.153
+A     @   185.199.110.153
+A     @   185.199.111.153
+
+# or for a subdomain (www.example.com):
+CNAME www username.github.io.
+
+# 2. Settings &rarr; Pages &rarr; Custom domain &rarr; enter it &rarr; Save
+#    (this commits a CNAME file to the repo - leave it there)
+# 3. Tick "Enforce HTTPS" once the certificate is issued (can take an hour)</code></pre>
+      <p>Delete the <code>CNAME</code> file and the domain detaches on the next build. That is the usual cause of a site that "randomly went back to github.io".</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span class="num">05</span>Traps, in the order people hit them</h2>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td>404 on the whole site</td><td>No <code>index.html</code> at the chosen root, or wrong branch/folder</td><td>Settings &rarr; Pages &rarr; recheck source</td></tr>
+            <tr><td>Page loads, no CSS</td><td>Absolute <code>/assets/&hellip;</code> path on a project site</td><td>Use relative paths, or set a base path in your bundler</td></tr>
+            <tr><td>Build folder half missing</td><td>Jekyll ate the <code>_underscore</code> folders</td><td>Add <code>.nojekyll</code></td></tr>
+            <tr><td>Old version still showing</td><td>CDN + browser cache</td><td>Hard reload, or wait a few minutes</td></tr>
+            <tr><td>SPA 404s on refresh</td><td>No file at that route</td><td>Hash routing, or copy <code>index.html</code> to <code>404.html</code></td></tr>
+            <tr><td><code>fetch()</code> fails locally but works live</td><td>Opened via <code>file://</code></td><td><code>python3 -m http.server 8000</code></td></tr>
+            <tr><td>Mixed-content warnings</td><td>An <code>http://</code> asset on an <code>https://</code> page</td><td>Use <code>https://</code> for every external URL</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Local preview: <code>python3 -m http.server 8000</code> then open <code>http://localhost:8000</code>.</p>
+  </div>
+</footer>
+
+</body>
+</html>

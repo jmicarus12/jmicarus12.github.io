@@ -1,0 +1,11 @@
+{
+  "note": "A plain file in git. Fetching it is the closest thing to a database GitHub Pages offers: read-only, public, and updated only by a commit.",
+  "updated": "2026-09-15",
+  "posts": [
+    { "id": 1, "title": "Static hosting, explained by doing", "date": "2026-09-15", "tags": ["intro", "html"] },
+    { "id": 2, "title": "Why your CSS 404s on a project site", "date": "2026-09-14", "tags": ["paths", "gotcha"] },
+    { "id": 3, "title": "Jekyll ate my _assets folder", "date": "2026-09-12", "tags": ["jekyll", "gotcha"] },
+    { "id": 4, "title": "Forms without a backend", "date": "2026-09-10", "tags": ["forms", "limits"] },
+    { "id": 5, "title": "Pointing a custom domain at github.io", "date": "2026-09-08", "tags": ["dns", "https"] }
+  ]
+}
