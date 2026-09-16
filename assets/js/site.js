@@ -89,3 +89,70 @@ document.addEventListener('DOMContentLoaded', () => {
     el.textContent = new Date().getFullYear();
   });
 });
+
+/* Screenshot lightbox. Progressive enhancement: with JS off the thumbnails are
+   still plain links straight to the full-size image. */
+document.addEventListener('DOMContentLoaded', () => {
+  const shots = Array.from(document.querySelectorAll('.shot'));
+  if (!shots.length) return;
+
+  const box = document.createElement('div');
+  box.className = 'lb';
+  box.hidden = true;
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Screenshot viewer');
+  box.innerHTML =
+    '<button class="close" type="button" aria-label="Close">&times;</button>' +
+    '<button class="prev" type="button" aria-label="Previous">&#8249;</button>' +
+    '<button class="next" type="button" aria-label="Next">&#8250;</button>' +
+    '<div><img alt=""><p class="cap"></p><p class="count"></p></div>';
+  document.body.appendChild(box);
+
+  const img = box.querySelector('img');
+  const cap = box.querySelector('.cap');
+  const count = box.querySelector('.count');
+  let at = 0;
+  let lastFocus = null;
+
+  const show = (i) => {
+    at = (i + shots.length) % shots.length;
+    const link = shots[at];
+    const thumb = link.querySelector('img');
+    img.src = link.getAttribute('href');
+    img.alt = thumb ? thumb.alt : '';
+    cap.innerHTML = '<b>' + (link.dataset.title || '') + '</b>' + (link.dataset.note || '');
+    count.textContent = (at + 1) + ' / ' + shots.length;
+  };
+
+  const open = (i, trigger) => {
+    lastFocus = trigger || document.activeElement;
+    show(i);
+    box.hidden = false;
+    document.body.style.overflow = 'hidden';
+    box.querySelector('.close').focus();
+  };
+
+  const close = () => {
+    box.hidden = true;
+    img.src = '';
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  };
+
+  shots.forEach((link, i) => {
+    link.addEventListener('click', (e) => { e.preventDefault(); open(i, link); });
+  });
+
+  box.querySelector('.close').addEventListener('click', close);
+  box.querySelector('.prev').addEventListener('click', () => show(at - 1));
+  box.querySelector('.next').addEventListener('click', () => show(at + 1));
+  box.addEventListener('click', (e) => { if (e.target === box) close(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (box.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(at - 1);
+    if (e.key === 'ArrowRight') show(at + 1);
+  });
+});

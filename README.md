@@ -17,6 +17,8 @@ GitHub Pages is good at.
 | `contact.html` | Email, LinkedIn, GitHub, Facebook |
 | `404.html` | Custom not-found page (uses absolute paths — it can be served at any depth) |
 | `lab/` | The self-testing GitHub Pages demo: live probes of what static hosting can and cannot do |
+| `demo/payroll.html` | Interactive payroll calculator — the pay rules from the Beeforce CMS, client-side only |
+| `assets/img/projects/` | Project screenshots used by the galleries |
 
 ## Editing it
 
