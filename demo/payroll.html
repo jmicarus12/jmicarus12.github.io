@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Payroll Calculator Demo &mdash; Brisbane Bacalla Jr</title>
+<meta name="description" content="An interactive demo of the payroll rules behind a security-agency CMS: day credit, overtime, night differential and government contributions. Runs entirely in the browser.">
+<meta name="theme-color" content="#04060b">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230b111d'/><text x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='monospace' font-size='26' font-weight='700' fill='%233b8dff'>BB</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="payroll.css">
+<script src="../assets/js/site.js" defer></script>
+<script src="payroll.js" defer></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <span class="mark photo" aria-hidden="true"><img src="../assets/img/brisbane.jpg" alt="" width="36" height="36"></span>
+      <span><b>Brisbane Bacalla Jr</b><small>PHP &middot; Laravel Developer</small></span>
+    </a>
+    <button class="navtoggle" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <nav class="site" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../experience.html">Experience</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero" style="padding-bottom:28px">
+    <p class="eyebrow">interactive demo &middot; no backend</p>
+    <h1 class="big">Payroll <span class="grad">Calculator</span></h1>
+    <p class="lede">
+      The pay rules from a security-agency CMS I built, rebuilt as a page you can poke at.
+      Enter shifts, change the contract rates, and watch the net pay move.
+    </p>
+    <p class="disclaimer">
+      <strong>This is a demonstration, not a payroll system.</strong> It runs entirely in your
+      browser &mdash; there is no server, no database and no client data here. Everything you type
+      is saved to this browser's <code>localStorage</code> and to nowhere else. The figures are
+      illustrative; do not pay anyone from them.
+    </p>
+  </div>
+
+  <section id="settings">
+    <div class="wrap">
+      <div class="shead">
+        <h2 data-num="01">Contract</h2>
+        <p>What the agency agreed with the client. In the real system these live on a contract
+           record per client; here they are yours to change.</p>
+      </div>
+
+      <div class="fields" id="contract-fields">
+        <label><span>Daily rate <em>&#8369;/day</em></span><input type="number" id="salary_rate" min="0" step="1"></label>
+        <label><span>Overtime <em>&#8369;/hour</em></span><input type="number" id="overtime_pay" min="0" step="1"></label>
+        <label><span>Night differential <em>&#8369;/shift</em></span><input type="number" id="night_diff_rate" min="0" step="1"></label>
+        <label><span>13th month <em>&#8369;/day</em></span><input type="number" id="thirteen_month_rate" min="0" step="0.01"></label>
+        <label><span>Incentive leave <em>&#8369;/day</em></span><input type="number" id="incentive_leave_rate" min="0" step="0.01"></label>
+        <label><span>Holiday pay <em>% of daily rate</em></span><input type="number" id="holiday_pay" min="0" step="1"></label>
+        <label><span>SSS <em>&#8369;/month</em></span><input type="number" id="sss" min="0" step="1"></label>
+        <label><span>Pag-IBIG <em>&#8369;/month</em></span><input type="number" id="pag_ibig" min="0" step="1"></label>
+        <label><span>PhilHealth <em>&#8369;/month</em></span><input type="number" id="phil_health" min="0" step="1"></label>
+        <label><span>Cash bond <em>&#8369;/cut-off</em></span><input type="number" id="cashbond" min="0" step="1"></label>
+      </div>
+
+      <div class="toggles">
+        <label class="tg"><input type="checkbox" id="f_incentive"><span>Pay incentive leave</span></label>
+        <label class="tg"><input type="checkbox" id="f_thirteenth"><span>Pay 13th month</span></label>
+        <label class="tg"><input type="checkbox" id="f_nightdiff"><span>Night differential (auto)</span></label>
+        <label class="tg"><input type="checkbox" id="f_monthend"><span>Month-end cut-off</span></label>
+      </div>
+      <p class="hint">
+        <strong>Month-end cut-off</strong> is the one that surprises people: SSS, Pag-IBIG and
+        PhilHealth are monthly, so they only come off the cut-off that ends the month. Tick it and
+        watch the deductions change.
+      </p>
+    </div>
+  </section>
+
+  <section id="shifts">
+    <div class="wrap">
+      <div class="shead">
+        <h2 data-num="02">Shifts</h2>
+        <p>One row per day worked. Add, edit or delete them &mdash; they persist in this browser.</p>
+      </div>
+
+      <div class="row" style="margin-bottom:16px">
+        <button type="button" id="add-shift" class="btn btn-primary">+ Add shift</button>
+        <button type="button" id="load-sample" class="btn btn-ghost">Load a sample cut-off</button>
+        <button type="button" id="clear-shifts" class="btn btn-ghost">Clear shifts</button>
+        <button type="button" id="reset-all" class="btn btn-ghost">Reset everything</button>
+      </div>
+
+      <div class="tablewrap">
+        <table id="shift-table">
+          <thead>
+            <tr>
+              <th>Date</th><th>Time in</th><th>Time out</th>
+              <th class="num">Hours</th><th>Credit</th><th class="num">OT</th>
+              <th>Holiday</th><th><span class="sr">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty" id="shift-empty" hidden>No shifts yet. Add one, or load the sample cut-off.</p>
+    </div>
+  </section>
+
+  <section id="result">
+    <div class="wrap">
+      <div class="shead">
+        <h2 data-num="03">Payslip</h2>
+        <p>Recalculated on every keystroke, using the rules in section 04.</p>
+      </div>
+
+      <div class="payslip">
+        <div class="ps-col">
+          <h3>Earnings</h3>
+          <dl id="earnings"></dl>
+        </div>
+        <div class="ps-col">
+          <h3>Deductions</h3>
+          <dl id="deductions"></dl>
+        </div>
+      </div>
+
+      <div class="netbar">
+        <div><span>Days credited</span><b id="out-days">0</b></div>
+        <div><span>Hours rendered</span><b id="out-hours">0</b></div>
+        <div><span>Gross</span><b id="out-gross">&#8369;0.00</b></div>
+        <div class="net"><span>Net pay</span><b id="out-net">&#8369;0.00</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="wrap">
+      <div class="shead">
+        <h2 data-num="04">How it is calculated</h2>
+        <p>Three of these are genuinely counter-intuitive, and all three came out of how the
+           agency actually pays people.</p>
+      </div>
+      <div class="grid2">
+        <div class="panel">
+          <h3>Four hours earns a full day</h3>
+          <p>A shift of 4 hours or more credits one whole day at the daily rate. A guard who
+             renders 5 hours is paid the same base as one who renders 8. Under 4 hours credits
+             nothing, though the hours still count toward the total rendered.</p>
+        </div>
+        <div class="panel">
+          <h3>Overtime is its own rate</h3>
+          <p>Anything past the 8th hour is paid at a flat overtime rate per hour set in the
+             contract &mdash; not a multiplier of the daily rate.</p>
+        </div>
+        <div class="panel">
+          <h3>Contributions are monthly, not per cut-off</h3>
+          <p>Cash bond comes off every cut-off. SSS, Pag-IBIG and PhilHealth only come off the
+             cut-off that ends the month, so a 1&ndash;15 payslip looks lighter than a
+             16&ndash;31 one.</p>
+        </div>
+        <div class="panel">
+          <h3>Night differential</h3>
+          <p>A shift falling inside the night window earns the flat night rate; one that only
+             overlaps it earns a pro-rated share, at the night rate divided by eight per hour.</p>
+        </div>
+      </div>
+      <p class="hint" style="margin-top:18px">
+        Simplified in one place: the original splits night differential into three overlap cases,
+        and holidays come from a holiday calendar rather than a checkbox per row.
+        <a href="../projects.html">See the real system &rarr;</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p style="margin:0">&copy; <span data-year>2026</span> Brisbane Bacalla Jr &middot; demo only, no data leaves your browser</p>
+    <div class="right">
+      <a href="../projects.html">Projects</a>
+      <a href="../lab/index.html">Pages Lab</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

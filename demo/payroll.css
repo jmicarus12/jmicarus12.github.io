@@ -1,0 +1,139 @@
+/* Page-specific styles for the payroll demo. The palette, header, footer and
+   buttons all come from ../assets/css/style.css - only the calculator's own
+   widgets are defined here. */
+
+.disclaimer {
+  margin: 22px 0 0; padding: 14px 17px; max-width: 72ch;
+  background: rgba(251, 191, 36, .07);
+  border: 1px solid rgba(251, 191, 36, .28);
+  border-left-width: 3px; border-radius: 10px;
+  color: var(--text-dim); font-size: 14.5px; line-height: 1.6;
+}
+.disclaimer strong { color: #fbbf24; font-weight: 650; }
+
+.hint {
+  color: var(--text-mute); font-size: 14px; margin: 14px 0 0; max-width: 74ch; line-height: 1.65;
+}
+.hint strong { color: var(--text-dim); }
+
+.sr {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---- contract fields ---- */
+.fields { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(186px, 1fr)); }
+.fields label { display: flex; flex-direction: column; gap: 6px; }
+.fields label span { font-size: 13px; color: var(--text-dim); }
+.fields label em {
+  font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--text-mute);
+}
+
+input[type="number"], input[type="time"], input[type="date"] {
+  font: 500 15px/1 var(--mono); color: var(--text);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 9px; padding: 10px 11px; width: 100%;
+  transition: border-color .15s, box-shadow .15s;
+}
+input[type="number"]:focus, input[type="time"]:focus, input[type="date"]:focus {
+  outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,141,255,.16);
+}
+input::-webkit-calendar-picker-indicator { filter: invert(.7); cursor: pointer; }
+
+/* ---- toggles ---- */
+.toggles { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.tg {
+  display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 999px; padding: 9px 16px 9px 12px;
+  font-size: 14px; color: var(--text-dim); transition: border-color .15s, color .15s, background .15s;
+}
+.tg:hover { border-color: var(--border-lit); color: var(--text); }
+.tg input { accent-color: var(--blue); width: 16px; height: 16px; cursor: pointer; }
+.tg:has(input:checked) {
+  color: var(--text); border-color: rgba(59,141,255,.4); background: rgba(59,141,255,.08);
+}
+
+/* ---- shift table ----
+   The portfolio stylesheet has no table rules (only the lab needed them), so
+   the table is styled here. The wrapper scrolls horizontally: eight columns of
+   date and time inputs cannot fit a phone, and without this the whole page
+   scrolls sideways instead. */
+.tablewrap {
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border); border-radius: var(--r);
+  background: var(--surface);
+}
+#shift-table { border-collapse: collapse; width: 100%; min-width: 660px; font-size: 14.5px; }
+#shift-table th, #shift-table td {
+  text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border);
+}
+#shift-table th {
+  font: 600 11px/1 var(--mono); letter-spacing: 1px; text-transform: uppercase;
+  color: var(--text-mute); white-space: nowrap; background: var(--surface-2);
+  /* Contains the absolutely-positioned .sr label below. Without a positioned
+     ancestor it anchors to the document, escapes .tablewrap's scroll container
+     and widens the whole page on mobile. */
+  position: relative;
+}
+#shift-table tbody tr:last-child td { border-bottom: 0; }
+#shift-table tbody tr:hover { background: rgba(59,141,255,.04); }
+
+#shift-table input { padding: 8px 9px; font-size: 14px; min-width: 120px; }
+#shift-table td { vertical-align: middle; }
+#shift-table td.num, #shift-table th.num { text-align: right; font-family: var(--mono); }
+#shift-table .credit {
+  font: 600 11px/1 var(--mono); padding: 4px 8px; border-radius: 5px; white-space: nowrap;
+}
+.credit.full { color: var(--ok, #4ade80); background: rgba(74,222,128,.12); border: 1px solid rgba(74,222,128,.28); }
+.credit.none { color: var(--text-mute); background: var(--surface-2); border: 1px solid var(--border); }
+.ot { color: var(--blue-lit); font-weight: 600; }
+.ot.zero { color: var(--text-mute); font-weight: 400; }
+
+.iconbtn {
+  background: var(--surface-2); border: 1px solid var(--border); color: var(--text-mute);
+  border-radius: 8px; width: 32px; height: 32px; display: grid; place-items: center;
+  font-size: 16px; line-height: 1; padding: 0;
+}
+.iconbtn:hover { color: var(--fail, #f87171); border-color: currentColor; background: var(--surface); }
+
+.empty {
+  text-align: center; color: var(--text-mute); font-size: 14.5px;
+  padding: 26px 16px; border: 1px dashed var(--border); border-radius: var(--r); margin-top: 14px;
+}
+
+/* ---- payslip ---- */
+.payslip { display: grid; gap: 15px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.ps-col { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 20px 22px; }
+.ps-col h3 {
+  margin: 0 0 14px; font: 600 11.5px/1 var(--mono);
+  letter-spacing: 1.3px; text-transform: uppercase; color: var(--text-mute);
+}
+.ps-col dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 9px 14px; }
+.ps-col dt { color: var(--text-dim); font-size: 14.5px; }
+.ps-col dt small { display: block; color: var(--text-mute); font-size: 12px; font-family: var(--mono); }
+.ps-col dd {
+  margin: 0; text-align: right; font-family: var(--mono); font-size: 14.5px; color: var(--text);
+}
+.ps-col dd.zero { color: var(--text-mute); }
+.ps-col .none { color: var(--text-mute); font-size: 14px; margin: 0; }
+
+.netbar {
+  display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-top: 15px; padding: 20px 22px;
+  background: linear-gradient(140deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border-lit); border-radius: var(--r);
+}
+.netbar div { display: flex; flex-direction: column; gap: 5px; }
+.netbar span { font: 500 11.5px/1 var(--mono); letter-spacing: .6px; text-transform: uppercase; color: var(--text-mute); }
+.netbar b { font-size: 21px; letter-spacing: -.6px; font-family: var(--mono); }
+.netbar .net b { color: #4ade80; font-size: 26px; }
+
+/* Narrow screens: let the inputs shrink so less sideways scrolling is needed. */
+@media (max-width: 620px) {
+  #shift-table { min-width: 580px; }
+  #shift-table th, #shift-table td { padding: 8px 9px; }
+  #shift-table input { min-width: 96px; font-size: 13px; padding: 7px 8px; }
+  .netbar b { font-size: 19px; }
+  .netbar .net b { font-size: 23px; }
+}
