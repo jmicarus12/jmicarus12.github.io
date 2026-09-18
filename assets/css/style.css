@@ -144,6 +144,84 @@ nav.site a[aria-current="page"] {
   .herogrid { grid-template-columns: 1fr; gap: 24px; }
   .portrait { width: 118px; height: 118px; flex-basis: 118px; justify-self: start; order: -1; }
 }
+
+/* ---------------- orbit: portrait nucleus, stack in orbit ----------------
+   Three concentric rings at different speeds and directions. Each chip is
+   nested three deep so it stays upright: the ring spins, the middle element
+   counter-spins to cancel it, and the inner one cancels the chip's own
+   position angle. */
+.orbit {
+  position: relative; width: 382px; height: 382px; flex: 0 0 382px; justify-self: end;
+  --core: 116px;
+}
+.orbit .core {
+  position: absolute; top: 50%; left: 50%; width: var(--core); height: var(--core);
+  margin: calc(var(--core) / -2) 0 0 calc(var(--core) / -2);
+  border-radius: 50%; overflow: hidden; z-index: 3;
+  border: 2px solid var(--border-lit);
+  box-shadow: 0 0 0 6px rgba(4,6,11,.9), 0 0 42px -6px var(--glow);
+}
+.orbit .core img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.orbit .glow {
+  position: absolute; top: 50%; left: 50%; width: 210px; height: 210px;
+  margin: -105px 0 0 -105px; border-radius: 50%; pointer-events: none; z-index: 0;
+  background: radial-gradient(circle, rgba(59,141,255,.20), transparent 65%);
+}
+
+.orbit .ring {
+  position: absolute; top: 50%; left: 50%; border-radius: 50%;
+  border: 1px dashed rgba(38,55,92,.85);
+  width: calc(var(--r) * 2); height: calc(var(--r) * 2);
+  margin: calc(var(--r) * -1) 0 0 calc(var(--r) * -1);
+  animation: orbspin var(--dur) linear infinite;
+  animation-direction: var(--dir, normal);
+}
+.orbit .ring.r1 { --r: 92px;  --dur: 26s; }
+.orbit .ring.r2 { --r: 130px; --dur: 38s; --dir: reverse; }
+.orbit .ring.r3 { --r: 168px; --dur: 52s; }
+
+.orbit .node {
+  position: absolute; top: 50%; left: 50%; width: 0; height: 0;
+  transform: rotate(var(--a)) translateY(calc(var(--r) * -1));
+}
+.orbit .node .spin {
+  display: block;
+  animation: orbspin var(--dur) linear infinite;
+  animation-direction: var(--dir, reverse);
+}
+.orbit .ring.r2 .node .spin { animation-direction: normal; }
+.orbit .node .fix { display: block; transform: rotate(calc(var(--a) * -1)); }
+
+.orbit .chip, #intro .chip {
+  width: 42px; height: 42px; margin: -21px 0 0 -21px;
+  border-radius: 12px; display: grid; place-items: center;
+  background: linear-gradient(160deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 16px -10px rgba(0,0,0,.9);
+  transition: border-color .2s, box-shadow .2s;
+}
+.orbit .chip img, #intro .chip img { width: 24px; height: 24px; object-fit: contain; display: block; }
+.orbit .chip .mono, #intro .chip .mono {
+  font: 700 11px/1 var(--mono); color: var(--blue-lit); letter-spacing: -.3px;
+}
+.orbit:hover .chip { border-color: var(--border-lit); box-shadow: 0 6px 18px -8px var(--glow); }
+
+@keyframes orbspin { to { transform: rotate(360deg); } }
+
+/* Hovering pauses it, so the logos can actually be read. */
+.orbit:hover .ring, .orbit:hover .node .spin { animation-play-state: paused; }
+
+@media (max-width: 980px) {
+  .orbit { width: 318px; height: 318px; flex-basis: 318px; --core: 100px; }
+  .orbit .ring.r1 { --r: 78px; } .orbit .ring.r2 { --r: 108px; } .orbit .ring.r3 { --r: 138px; }
+}
+@media (max-width: 760px) {
+  .orbit { justify-self: center; order: -1; width: 280px; height: 280px; flex-basis: 280px; --core: 92px; }
+  .orbit .ring.r1 { --r: 66px; } .orbit .ring.r2 { --r: 93px; } .orbit .ring.r3 { --r: 118px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit .ring, .orbit .node .spin { animation: none !important; }
+}
 .eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
   font: 500 12.5px/1 var(--mono); letter-spacing: .4px;
@@ -281,9 +359,10 @@ section + section { border-top: 1px solid var(--border); }
   align-self: start; padding-top: 14px; font-family: var(--mono); font-size: 13px; color: var(--text-mute);
 }
 .tl:nth-child(odd)  .card-x { grid-column: 1; }
-.tl:nth-child(odd)  .when   { grid-column: 3; text-align: left; }
+/* clear of the node's 6px outer ring on whichever side it sits */
+.tl:nth-child(odd)  .when   { grid-column: 3; text-align: left;  padding-left: 16px; }
 .tl:nth-child(even) .card-x { grid-column: 3; }
-.tl:nth-child(even) .when   { grid-column: 1; text-align: right; }
+.tl:nth-child(even) .when   { grid-column: 1; text-align: right; padding-right: 16px; }
 
 .card-x {
   background: var(--surface); border: 1px solid var(--border);
@@ -318,6 +397,7 @@ section + section { border-top: 1px solid var(--border); }
   .tl .card-x, .tl:nth-child(odd) .card-x, .tl:nth-child(even) .card-x { grid-column: 2; grid-row: 2; margin-top: 12px; }
   .tl .when, .tl:nth-child(odd) .when, .tl:nth-child(even) .when {
     grid-column: 2; grid-row: 1; text-align: left; padding-top: 17px;
+    padding-left: 0; padding-right: 0;   /* on mobile the node is above, not beside */
   }
 }
 
@@ -527,3 +607,112 @@ html.js .rv.in { opacity: 1; transform: none; }
 /* selection + focus */
 ::selection { background: rgba(59,141,255,.3); color: #fff; }
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+
+/* ===================================================================
+   INTRO SEQUENCE
+   Injected by assets/js/intro.js, so it never exists without JS.
+   Stack marks spiral out into three tilted shells around a nucleus,
+   the name resolves, then the whole atom flies into #heroatom.
+   =================================================================== */
+#intro {
+  position: fixed; inset: 0; z-index: 999;
+  perspective: 1100px; perspective-origin: 50% 44%;
+  overflow: hidden;
+}
+#intro .bg { position: absolute; inset: 0; background: var(--bg); }
+#intro .grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(59,141,255,.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59,141,255,.07) 1px, transparent 1px);
+  background-size: 62px 62px;
+  mask-image: radial-gradient(62% 56% at 50% 44%, #000 0%, transparent 78%);
+  -webkit-mask-image: radial-gradient(62% 56% at 50% 44%, #000 0%, transparent 78%);
+}
+#intro .world { position: absolute; inset: 0; transform-style: preserve-3d; }
+#intro .shells { position: absolute; inset: 0; transform-style: preserve-3d; }
+
+/* the nucleus — becomes the portrait, so JS drives size */
+#intro .nucleus {
+  position: absolute; left: 0; top: 0; border-radius: 50%; z-index: 1;
+  will-change: transform, width, height;
+  box-shadow: 0 0 0 1px rgba(59,141,255,.3), 0 0 90px 10px rgba(59,141,255,.22);
+}
+#intro .nucleus .sheen {
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(circle at 34% 28%,
+    #cfe3ff 0%, var(--blue-lit) 22%, var(--blue) 46%, var(--blue-deep) 74%, #08101f 100%);
+  box-shadow: inset -14px -18px 46px rgba(0,0,0,.7);
+}
+#intro .nucleus img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; border-radius: inherit; opacity: 0;
+}
+
+#intro .path {
+  position: absolute; left: 0; top: 0;
+  border: 1px dashed rgba(59,141,255,.34); border-radius: 50%;
+  will-change: transform, opacity;
+}
+#intro .mark { position: absolute; left: 0; top: 0; will-change: transform; }
+#intro .mark .chip { width: 100%; height: 100%; margin: 0; }
+#intro .mark .chip img { width: 58%; height: 58%; }
+
+#intro .copy {
+  position: absolute; left: 0; right: 0; top: 71%;
+  text-align: center; padding-inline: 20px; z-index: 3; pointer-events: none;
+}
+#intro .copy h2 {
+  margin: 0; color: var(--text);
+  font: 750 clamp(22px, 5vw, 46px)/1 var(--sans); letter-spacing: -.03em;
+}
+#intro .copy .rule {
+  width: 54px; height: 1px; margin: 16px auto 0; transform-origin: center;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+}
+#intro .copy .sub {
+  display: inline-block; margin-top: 13px; color: var(--text-dim);
+  font: 500 clamp(9px, 1.5vw, 11.5px)/1 var(--mono);
+  letter-spacing: .3em; text-transform: uppercase;
+}
+
+#intro .skipbtn {
+  position: absolute; z-index: 4;
+  right: calc(18px + env(safe-area-inset-right, 0px));
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  appearance: none; cursor: pointer; background: none;
+  border: 1px solid var(--border-lit); color: var(--text-dim);
+  border-radius: 8px; padding: 10px 16px;
+  font: 500 10px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase;
+  transition: border-color .2s, color .2s, opacity .3s;
+}
+#intro .skipbtn:hover { border-color: var(--blue); color: var(--text); }
+
+/* ---- what the page underneath does while the intro runs ---- */
+html.intro-run, html.intro-run body { overflow: hidden; }
+html.intro-run header.site,
+html.intro-run .i-in { opacity: 0; }
+/* the hero atom stays hidden and paused until the flying copy lands on it —
+   .intro-landing outlives .intro-run for exactly that reason */
+html.intro-run #heroatom,
+html.intro-landing #heroatom { opacity: 0; }
+html.intro-run #heroatom .ring, html.intro-run #heroatom .node .spin,
+html.intro-landing #heroatom .ring, html.intro-landing #heroatom .node .spin {
+  animation-play-state: paused;
+}
+
+html.intro-settle header.site { opacity: 1; transition: opacity .7s ease .25s; }
+html.intro-settle #heroatom { opacity: 1; transition: opacity .55s ease .35s; }
+html.intro-settle .i-in {
+  opacity: 1; transform: none;
+  transition: opacity .75s cubic-bezier(.22,.61,.36,1), transform .75s cubic-bezier(.22,.61,.36,1);
+}
+html.intro-settle .i-in:nth-of-type(2) { transition-delay: .06s; }
+html.intro-settle .i-in:nth-of-type(3) { transition-delay: .12s; }
+html.intro-run .i-in { transform: translateY(16px); }
+
+@media (prefers-reduced-motion: reduce) {
+  #intro { display: none; }
+  html.intro-run header.site, html.intro-run .i-in,
+  html.intro-run #heroatom, html.intro-landing #heroatom { opacity: 1; }
+}
