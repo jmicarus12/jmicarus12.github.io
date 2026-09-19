@@ -278,7 +278,9 @@ section + section { border-top: 1px solid var(--border); }
 .shead h2 {
   font-size: clamp(25px, 4vw, 34px); letter-spacing: -1.1px; margin: 0 0 8px; font-weight: 700;
 }
-.shead h2::before {
+/* Only headings that carry a number get the label, so dropping the
+   attribute doesn't leave an empty block taking up space. */
+.shead h2[data-num]::before {
   content: attr(data-num); font: 600 13px/1 var(--mono); color: var(--blue);
   display: block; margin-bottom: 9px; letter-spacing: 1px;
 }
@@ -447,6 +449,42 @@ section + section { border-top: 1px solid var(--border); }
   content: "▸"; position: absolute; left: 4px; top: -1px; color: var(--blue); font-size: 13px;
 }
 .project .stack { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+/* ---------------- projects summary (home) ---------------- */
+.psum { display: grid; gap: 11px; }
+.psum-row {
+  display: flex; align-items: center; gap: 15px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 15px 18px; color: var(--text);
+  transition: border-color .2s, transform .2s, background .2s, box-shadow .2s;
+}
+.psum-row:hover {
+  color: var(--text); border-color: var(--border-lit); background: var(--surface-2);
+  transform: translateY(-3px); box-shadow: 0 16px 32px -22px var(--glow);
+}
+.psum-row .mark2 {
+  width: 40px; height: 40px; flex: 0 0 40px; border-radius: 11px;
+  background: #f4f6fa; padding: 5px; box-sizing: border-box;
+  display: grid; place-items: center; overflow: hidden;
+}
+.psum-row .mark2.fill { background: none; padding: 0; }
+.psum-row .mark2 img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.psum-row .mark2.fill img { object-fit: cover; }
+.psum-row b { display: block; font-size: 15.5px; font-weight: 650; letter-spacing: -.3px; }
+.psum-row span { display: block; font-size: 13.8px; color: var(--text-dim); margin-top: 2px; }
+.psum-row .live2 {
+  margin-left: auto; flex: 0 0 auto; align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  font: 600 10.5px/1 var(--mono); letter-spacing: .5px; text-transform: uppercase;
+  color: #4ade80; background: rgba(34,197,94,.1);
+  border: 1px solid rgba(34,197,94,.28); border-radius: 999px; padding: 6px 11px;
+}
+.psum-row .arrow2 { margin-left: auto; color: var(--text-mute); font-size: 17px; flex: 0 0 auto; }
+.psum-row:hover .arrow2 { color: var(--blue-lit); }
+@media (max-width: 560px) {
+  .psum-row { align-items: flex-start; }
+  .psum-row .live2, .psum-row .arrow2 { display: none; }
+}
+
 /* ---------------- binary-tree figure (DNA) ---------------- */
 .treefig { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border); }
 .treefig h4 {

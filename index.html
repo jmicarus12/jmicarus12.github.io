@@ -12,7 +12,7 @@
 <meta name="theme-color" content="#04060b">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230b111d'/><text x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='monospace' font-size='26' font-weight='700' fill='%233b8dff'>BB</text></svg>">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="assets/css/style.css?v=de2a25ee">
+<link rel="stylesheet" href="assets/css/style.css?v=5cfd9d3f">
 <script>
 /* Hide the hero before first paint so the intro never flashes past it.
    Mirrors the approach in the edjen project. If intro.js never loads,
@@ -118,7 +118,7 @@
   <section>
     <div class="wrap">
       <div class="shead rv">
-        <h2 data-num="01">My Skills</h2>
+        <h2>My Skills</h2>
         <p>What I reach for day to day. The tools near the top of each row are the ones I have
            actually shipped and maintained in production, not just read about.</p>
       </div>
@@ -176,35 +176,38 @@
   <section>
     <div class="wrap">
       <div class="shead rv">
-        <h2 data-num="02">Right now</h2>
-        <p>Where my time goes at the moment.</p>
+        <h2>Projects</h2>
+        <p>Four systems, three of them load-bearing for somebody's business. The newest
+           one is live and you can click straight into it.</p>
       </div>
-      <div class="grid2">
-        <div class="panel rv">
-          <h3>Forty Degrees Celsius Inc.</h3>
-          <p>Full-stack work on an online language-learning platform (LMS) in
-             <strong style="color:var(--text)">CakePHP</strong> &mdash; feature enhancements,
-             bug fixing and maintenance alongside the team.</p>
-        </div>
-        <div class="panel rv">
-          <h3>Shipped &amp; live</h3>
-          <p><a href="https://hrmobiletires.ca/" target="_blank" rel="noopener noreferrer">High
-             River Mobile Tire Services</a> &mdash; a booking platform on Laravel 12, Livewire 4
-             and Flux, running in production on Hostinger.</p>
-        </div>
-        <div class="panel rv">
-          <h3>Off-hours maintenance</h3>
-          <p>Freelance support on an existing Laravel CMS: debugging, new functionality and
-             performance work scheduled outside business hours so nothing goes down mid-day.</p>
-        </div>
-        <div class="panel rv">
-          <h3>University of Cebu &mdash; BSCS</h3>
-          <p>BS Computer Science, Mandaue City. June 2013 &ndash; August 2018.</p>
-        </div>
-        <div class="panel rv">
-          <h3>Languages</h3>
-          <p>Bisaya, Tagalog and English &mdash; comfortable working in any of the three.</p>
-        </div>
+
+      <div class="psum">
+        <a class="psum-row rv" href="projects.html">
+          <span class="mark2" aria-hidden="true"><img src="assets/img/projects/icons/hrmts.png" alt="" loading="lazy"></span>
+          <span><b>High River Mobile Tire Services</b><span>Booking platform for a mobile tire business in Alberta &mdash; Laravel 12, Livewire 4, Flux.</span></span>
+          <span class="live2"><span class="livedot" aria-hidden="true"></span>Live</span>
+        </a>
+        <a class="psum-row rv" href="projects.html">
+          <span class="mark2" aria-hidden="true"><img src="assets/img/projects/icons/beeforce.png" alt="" loading="lazy"></span>
+          <span><b>Beeforce CMS + Payroll</b><span>Custom CMS and payroll a security agency runs its guards, clients and money on.</span></span>
+          <span class="arrow2" aria-hidden="true">&rarr;</span>
+        </a>
+        <a class="psum-row rv" href="projects.html">
+          <span class="mark2" aria-hidden="true"><img src="assets/img/projects/icons/hands.png" alt="" loading="lazy"></span>
+          <span><b>HANDS</b><span>Telecom site infrastructure and maintenance management, 67 models of physical plant.</span></span>
+          <span class="arrow2" aria-hidden="true">&rarr;</span>
+        </a>
+        <a class="psum-row rv" href="projects.html">
+          <span class="mark2 fill" aria-hidden="true"><img src="assets/img/projects/icons/dna.png" alt="" loading="lazy"></span>
+          <span><b>DNA</b><span>Product distribution on a binary placement tree, with registration codes and node points.</span></span>
+          <span class="arrow2" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
+      <div class="row" style="margin-top:20px">
+        <a class="btn btn-primary" href="projects.html">
+          See all projects, screenshots and the payroll demo &rarr;
+        </a>
       </div>
     </div>
   </section>
